@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { StyleSheet, Text, View, Button, Alert, Linking, AppState } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert, Linking } from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
