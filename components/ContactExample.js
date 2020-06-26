@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Text } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import * as Contacts from 'expo-contacts'
 import { ContactPermissionsButton } from './ContactPermissionsButton'
 
@@ -18,15 +18,19 @@ export const ContactExample = () => {
 			})
 
 			if (data.length > 0) {
-				const contact = data[0]
-				console.log(contact)
+				setContacts(data)
 			}
 		}
 	}, [])
 
 	return (
 		<>
-			<Text>Here's a contact: {contacts[0]}</Text>
+			<ScrollView>
+				<Text>Here's ur contacts: </Text>
+				{contacts.map((contact, i) => (
+					<Text key={i}>{contact.name}</Text>
+				))}
+			</ScrollView>
 			<ContactPermissionsButton />
 		</>
 	)
