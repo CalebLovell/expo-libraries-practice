@@ -26,7 +26,6 @@ export const NotificationDisplay = () => {
 				try {
 					const expoToken = await Notifications.getExpoPushTokenAsync()
 					setToken(expoToken)
-					console.log(`hello? ${expoToken}`)
 				} catch (error) {
 					console.log(error)
 				}
