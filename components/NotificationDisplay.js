@@ -3,7 +3,7 @@ import { Text, Alert, Vibration } from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
-import { UpdatePermissionsButton } from './UpdatePermissionsButton'
+import { NotificationPermissionsButton } from './NotificationPermissionsButton'
 
 export const NotificationDisplay = () => {
 	const [notificationPermission, setNotificationPermission] = useState(false)
@@ -52,7 +52,7 @@ export const NotificationDisplay = () => {
 					<Text>Message: {JSON.stringify(notification.data.message)}</Text>
 				</>
 			) : null}
-			<UpdatePermissionsButton setToken={setToken} />
+			<NotificationPermissionsButton setToken={setToken} />
 		</>
 	)
 }

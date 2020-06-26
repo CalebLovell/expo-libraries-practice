@@ -3,7 +3,7 @@ import { Button, Alert, Linking } from 'react-native'
 import { Notifications } from 'expo'
 import useAppState from 'react-native-appstate-hook'
 
-export const UpdatePermissionsButton = props => {
+export const NotificationPermissionsButton = props => {
 	useAppState({
 		onForeground: async () => {
 			try {
@@ -18,8 +18,8 @@ export const UpdatePermissionsButton = props => {
 
 	const updatePermission = () => {
 		Alert.alert(
-			'Notification Permission',
-			'If you would like to be able to receive Push Notifications, you must change them in your app settings.',
+			'Notifications Permission',
+			'If you would like to be able to receive Push Notifications, you must grant Circles permission in your app settings.',
 			[
 				{ text: 'Cancel', onPress: null, style: 'cancel' },
 				{
@@ -32,5 +32,5 @@ export const UpdatePermissionsButton = props => {
 		)
 	}
 
-	return <Button onPress={updatePermission} title='Get Permission Again' />
+	return <Button onPress={updatePermission} title='Get Notifications Permission Again' />
 }
