@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Alert, Vibration } from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
-import { UpdatePermissionsButton } from './UpdatePermissionsButton'
+import { UpdatePermissionsButton } from './components/UpdatePermissionsButton'
 
 const App = () => {
 	const [notificationPermission, setNotificationPermission] = useState(false)
