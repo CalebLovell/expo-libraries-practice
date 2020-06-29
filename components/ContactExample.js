@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { ScrollView, Text } from 'react-native'
 import * as Contacts from 'expo-contacts'
-import { ContactPermissionsButton } from './ContactPermissionsButton'
 
 export const ContactExample = () => {
 	const [contacts, setContacts] = useState([])
@@ -14,8 +13,10 @@ export const ContactExample = () => {
 		const { status } = await Contacts.requestPermissionsAsync()
 		if (status === 'granted') {
 			const { data } = await Contacts.getContactsAsync({
-				fields: [Contacts.Fields.Emails],
+				sort: Contacts.SortTypes.LastName,
 			})
+			const specialContacts = data.filter(person => person.birthday)
+			console.log(specialContacts[0])
 
 			if (data.length > 0) {
 				setContacts(data)
@@ -31,7 +32,6 @@ export const ContactExample = () => {
 					<Text key={i}>{contact.name}</Text>
 				))}
 			</ScrollView>
-			<ContactPermissionsButton />
 		</>
 	)
 }
