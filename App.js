@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { ContactExample } from './components/ContactExample'
+import ImagePickerExample from './components/ImagePickerExample'
 
 const App = () => {
 	return (
 		<View style={styles.container}>
-			<ContactExample />
+			<ImagePickerExample />
 		</View>
 	)
 }
