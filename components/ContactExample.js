@@ -15,11 +15,11 @@ export const ContactExample = () => {
 			const { data } = await Contacts.getContactsAsync({
 				sort: Contacts.SortTypes.LastName,
 			})
-			const specialContacts = data.filter(person => person.birthday)
+			const specialContacts = data.filter(person => person.id)
 			console.log(specialContacts[0])
 
 			if (data.length > 0) {
-				setContacts(data)
+				setContacts(specialContacts)
 			}
 		}
 	}, [])
