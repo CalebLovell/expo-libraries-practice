@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Text, View, useColorScheme } from 'react-native'
-import { useColorScheme as useRNAppearanceColorScheme } from 'react-native-appearance'
+
+const colorSchemes = {
+	light: {
+		background: '#fff',
+		text: '#333',
+	},
+	dark: {
+		background: '#333',
+		text: '#fff',
+	},
+}
 
 export const ColorThemeTest = () => {
-	const rnColorScheme = useColorScheme()
-	const colorScheme = useRNAppearanceColorScheme()
+	const colorScheme = useColorScheme()
+	const colors = colorSchemes[colorScheme]
+	const renders = useRef(0)
+	renders.current++
+	console.log(renders.current + colorScheme)
 	return (
-		<View>
-			<Text style={{ color: rnColorScheme === 'light' ? 'red' : 'purple' }}>RN says it is: {rnColorScheme}</Text>
-			<Text style={{ color: rnColorScheme === 'light' ? 'red' : 'purple' }}>rn-appearance says it is: {colorScheme}</Text>
+		<View style={{ backgroundColor: colors.background }}>
+			<Text style={{ color: colors.text }}>
+				renders number is: {renders.current} {colorScheme}
+			</Text>
 		</View>
 	)
 }
