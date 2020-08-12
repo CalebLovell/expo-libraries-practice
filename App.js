@@ -1,12 +1,15 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { ColorThemeTest } from './components/ColorThemeExample'
+import { StyleProvider } from './components/StyleProvider'
 
 const App = () => {
 	return (
-		<View style={styles.container}>
-			<ColorThemeTest />
-		</View>
+		<StyleProvider>
+			<View style={styles.container}>
+				<ColorThemeTest />
+			</View>
+		</StyleProvider>
 	)
 }
 

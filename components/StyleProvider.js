@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useMemo } from 'react'
-import { useColorScheme } from 'react-native'
+import React, { createContext, useContext } from 'react'
+import { useColorScheme } from 'react-native-appearance'
 
 const StyleStateContext = createContext()
 
@@ -15,10 +15,14 @@ const colorSchemes = {
 }
 
 function StyleProvider({ children }) {
-	// const [isDarkMode, setIsDarkMode] = useState(useColorScheme() === 'light' ? false : true)
-	const theme = colorSchemes[useColorScheme()]
+	const theme = useColorScheme()
+	const colors = colorSchemes[theme]
+	const state = {
+		theme: theme,
+		colors: colors,
+	}
 
-	return <StyleStateContext.Provider value={theme}>{children}</StyleStateContext.Provider>
+	return <StyleStateContext.Provider value={state}>{children}</StyleStateContext.Provider>
 }
 
 function useStyleState() {
