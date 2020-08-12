@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
-import { Text, View, useColorScheme } from 'react-native'
+import { Text, View } from 'react-native'
+import { useColorScheme } from 'react-native-appearance'
 
 const colorSchemes = {
 	light: {
