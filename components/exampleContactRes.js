@@ -53,13 +53,13 @@ export const iosExample = {
 	image: {
 		height: 320,
 		uri:
-			'file:///var/mobile/Containers/Data/Application/FD557C0A-0D4B-4EB3-B5ED-27D89656E700/Library/Caches/ExponentExperienceData/%2540caleblovell%252Fmedia-test/Contacts/DD213B2E-29B8-470E-8C17-2A2A1BE2A23E-thumbnailImageData.png',
+			'file:///var/mobile/Containers/Data/Application/FD557C0A-0D4B-4EB3-B5ED-27D89656E700/Library/Caches/ExponentExperienceData/%2540caleblovell%expo-libraries-test/Contacts/DD213B2E-29B8-470E-8C17-2A2A1BE2A23E-thumbnailImageData.png',
 		width: 320,
 	},
 	rawImage: {
 		height: 345,
 		uri:
-			'file:///var/mobile/Containers/Data/Application/FD557C0A-0D4B-4EB3-B5ED-27D89656E700/Library/Caches/ExponentExperienceData/%2540caleblovell%252Fmedia-test/Contacts/DD213B2E-29B8-470E-8C17-2A2A1BE2A23E-imageData.png',
+			'file:///var/mobile/Containers/Data/Application/FD557C0A-0D4B-4EB3-B5ED-27D89656E700/Library/Caches/ExponentExperienceData/%2540caleblovell%expo-libraries-test/Contacts/DD213B2E-29B8-470E-8C17-2A2A1BE2A23E-imageData.png',
 		width: 345,
 	},
 }

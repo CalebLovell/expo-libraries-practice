@@ -1,7 +1,7 @@
 {
 	"expo": {
-		"name": "media-test",
-		"slug": "media-test",
+		"name": "expo-libraries-practice",
+		"slug": "expo-libraries-practice",
 		"platforms": ["ios", "android", "web"],
 		"version": "1.0.0",
 		"orientation": "portrait",
