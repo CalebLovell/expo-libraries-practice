@@ -1,13 +1,15 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { ColorThemeTest } from './components/ColorThemeExample'
+import { NewNotificationDisplay } from './components/NewNotificationDisplayer'
+import { NotificationDisplay } from './components/NotificationDisplay'
 import { StyleProvider } from './components/StyleProvider'
 
 const App = () => {
 	return (
 		<StyleProvider>
 			<View style={styles.container}>
-				<ColorThemeTest />
+				{/* <NewNotificationDisplay /> */}
+				<NotificationDisplay />
 			</View>
 		</StyleProvider>
 	)
