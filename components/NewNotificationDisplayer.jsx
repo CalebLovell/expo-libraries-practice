@@ -7,8 +7,8 @@ import { Text, View, Button, Platform } from 'react-native'
 Notifications.setNotificationHandler({
 	handleNotification: () => ({
 		shouldShowAlert: true,
-		shouldPlaySound: false,
-		shouldSetBadge: false,
+		shouldPlaySound: true,
+		shouldSetBadge: true,
 	}),
 })
 
@@ -18,27 +18,8 @@ export const NewNotificationDisplay = () => {
 	const notificationListener = useRef()
 	const responseListener = useRef()
 
-	useEffect(() => {
-		registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
-
-		// This listener is fired whenever a notification is received while the app is foregrounded
-		notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-			setNotification(notification)
-		})
-
-		// This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-		responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-			console.log(response)
-		})
-
-		return () => {
-			Notifications.removeNotificationSubscription(notificationListener)
-			Notifications.removeNotificationSubscription(responseListener)
-		}
-	}, [])
-
 	// Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/dashboard/notifications
-	async function sendPushNotification(expoPushToken) {
+	const sendPushNotification = async () => {
 		const message = {
 			to: expoPushToken,
 			sound: 'default',
@@ -58,7 +39,7 @@ export const NewNotificationDisplay = () => {
 		})
 	}
 
-	async function registerForPushNotificationsAsync() {
+	const registerForPushNotificationsAsync = async () => {
 		let token
 		if (Constants.isDevice) {
 			const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
@@ -88,6 +69,25 @@ export const NewNotificationDisplay = () => {
 
 		return token
 	}
+
+	useEffect(() => {
+		registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
+
+		// This listener is fired whenever a notification is received while the app is foregrounded
+		notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+			setNotification(notification)
+		})
+
+		// This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+		responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+			console.log(response)
+		})
+
+		return () => {
+			Notifications.removeNotificationSubscription(notificationListener)
+			Notifications.removeNotificationSubscription(responseListener)
+		}
+	}, [])
 
 	return (
 		<View

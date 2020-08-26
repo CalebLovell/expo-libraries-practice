@@ -1,15 +1,13 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { NewNotificationDisplay } from './components/NewNotificationDisplayer'
-import { NotificationDisplay } from './components/NotificationDisplay'
 import { StyleProvider } from './components/StyleProvider'
 
 const App = () => {
 	return (
 		<StyleProvider>
 			<View style={styles.container}>
-				{/* <NewNotificationDisplay /> */}
-				<NotificationDisplay />
+				<NewNotificationDisplay />
 			</View>
 		</StyleProvider>
 	)
