@@ -1,36 +1,22 @@
-import * as Contacts from 'expo-contacts'
-
-import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView, Text } from 'react-native'
 
+import React from 'react'
+import useLocalContacts from '../data/useLocalContacts'
+
+const renderPosts = (status, data, error) => {
+	if (status === 'loading') return <Text>Loading...</Text>
+	else if (status === 'error') return <Text>{error.message}</Text>
+	else return data.map((contact, i) => <Text key={i}>{contact.name}</Text>)
+}
+
 export const ContactExample = () => {
-	const [contacts, setContacts] = useState([])
-
-	useEffect(() => {
-		checkContactsPermission()
-	}, [checkContactsPermission])
-
-	const checkContactsPermission = useCallback(async () => {
-		const { status } = await Contacts.requestPermissionsAsync()
-		if (status === 'granted') {
-			const { data } = await Contacts.getContactsAsync({
-				sort: Contacts.SortTypes.LastName,
-			})
-			const specialContacts = data.filter(person => person.id)
-			console.log(specialContacts[0])
-
-			if (data.length > 0) {
-				setContacts(specialContacts)
-			}
-		}
-	}, [])
+	const { status, data, error, isFetching } = useLocalContacts()
 
 	return (
 		<ScrollView>
+			<Text>{isFetching ? 'Updating...' : ''}</Text>
 			<Text>Here's ur contacts: </Text>
-			{contacts.map((contact, i) => (
-				<Text key={i}>{contact.name}</Text>
-			))}
+			{renderPosts(status, data, error)}
 		</ScrollView>
 	)
 }
