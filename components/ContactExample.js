@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { ScrollView, Text } from 'react-native'
 import * as Contacts from 'expo-contacts'
+
+import React, { useCallback, useEffect, useState } from 'react'
+import { ScrollView, Text } from 'react-native'
 
 export const ContactExample = () => {
 	const [contacts, setContacts] = useState([])
@@ -25,13 +26,11 @@ export const ContactExample = () => {
 	}, [])
 
 	return (
-		<>
-			<ScrollView>
-				<Text>Here's ur contacts: </Text>
-				{contacts.map((contact, i) => (
-					<Text key={i}>{contact.name}</Text>
-				))}
-			</ScrollView>
-		</>
+		<ScrollView>
+			<Text>Here's ur contacts: </Text>
+			{contacts.map((contact, i) => (
+				<Text key={i}>{contact.name}</Text>
+			))}
+		</ScrollView>
 	)
 }

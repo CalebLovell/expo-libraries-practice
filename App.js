@@ -1,13 +1,14 @@
-import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { NewNotificationDisplay } from './components/NewNotificationDisplayer'
+
+import { ContactExample } from './components/ContactExample'
+import React from 'react'
 import { StyleProvider } from './components/StyleProvider'
 
 const App = () => {
 	return (
 		<StyleProvider>
 			<View style={styles.container}>
-				<NewNotificationDisplay />
+				<ContactExample />
 			</View>
 		</StyleProvider>
 	)
