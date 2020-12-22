@@ -14,6 +14,6 @@ const getLocalContacts = async () => {
 	}
 }
 
-export default function usePosts() {
+export const useLocalContacts = () => {
 	return useQuery('localContacts', getLocalContacts)
 }

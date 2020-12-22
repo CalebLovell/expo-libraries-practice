@@ -1,7 +1,7 @@
 import { ScrollView, Text } from 'react-native'
 
 import React from 'react'
-import useLocalContacts from '../data/useLocalContacts'
+import { useLocalContacts } from '../data/useLocalContacts'
 
 const renderPosts = (status, data, error) => {
 	if (status === 'loading') return <Text>Loading...</Text>
