@@ -18,10 +18,8 @@ const Item = ({ item, selectedData, setSelectedData }) => {
 		}
 	}
 	return (
-		<TouchableOpacity onPress={onPress}>
-			<View style={[styles.item, { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' }]}>
-				<Text>{item.name}</Text>
-			</View>
+		<TouchableOpacity onPress={onPress} style={[styles.item, { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' }]}>
+			<Text>{item.name}</Text>
 		</TouchableOpacity>
 	)
 }
