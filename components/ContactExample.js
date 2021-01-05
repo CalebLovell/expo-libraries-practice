@@ -31,28 +31,24 @@ export const ContactExample = () => {
 	const [dataGroups, setDataGroups] = React.useState([])
 
 	React.useEffect(() => {
-		if (status !== 'loading' && status !== 'error') {
-			const groupContactsByLetter = () => {
-				const contactsByLetter = []
-				data.forEach(contact => {
-					const { firstName, lastName, company } = contact
-					const letter = lastName?.charAt(0) || firstName?.charAt(0) || company?.charAt(0)
-					// If letter doesn't exist in array, create it
-					!(letter in contactsByLetter) ? (contactsByLetter[letter] = { title: letter, data: [] }) : null
-					// Push contact to correct letter
-					contactsByLetter[letter].data.push(contact)
-				})
-				const sortedLetters = Object.keys(contactsByLetter).sort()
-				const sortedArray = []
-				sortedLetters.forEach(letter => {
-					const letterGroup = contactsByLetter[letter]
-					sortedArray.push(letterGroup)
-				})
-				return sortedArray
+		if (status !== 'loading' && status !== 'error') setDataGroups(groupData())
+	}, [data, groupData, status])
+
+	const groupData = React.useCallback(() => {
+		const letters = []
+		const groups = []
+		data.forEach(contact => {
+			const { firstName, lastName, company } = contact
+			const letter = lastName?.charAt(0) || firstName?.charAt(0) || company?.charAt(0)
+			if (!letters.includes(letter)) {
+				letters.push(letter)
+				groups.push({ title: letter, data: [] })
 			}
-			setDataGroups(groupContactsByLetter())
-		}
-	}, [data, status])
+			const group = groups.find(x => x.title === letter)
+			group.data.push(contact)
+		})
+		return groups.sort((a, b) => a.title > b.title)
+	}, [data])
 
 	const renderPosts = () => {
 		if (status === 'loading') {
