@@ -1,14 +1,15 @@
 import * as React from 'react'
 
 import { SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { differenceWith, isEqual, pull } from 'lodash'
 
-import { pull } from 'lodash'
+import { useDeleteLocalContacts } from '../data/useDeleteContacts'
 import { useLocalContacts } from '../data/useLocalContacts'
 
 const Item = ({ item, selectedData, setSelectedData }) => {
 	const [selected, setSelected] = React.useState(selectedData.includes(item))
 	const addSelected = () => setSelectedData([...selectedData, item])
-	const removeSelected = () => setSelectedData(pull(selectedData, selected))
+	const removeSelected = () => setSelectedData(pull(selectedData, item))
 	const onPress = () => {
 		if (selected) {
 			setSelected(false)
@@ -26,13 +27,14 @@ const Item = ({ item, selectedData, setSelectedData }) => {
 }
 
 export const ContactExample = () => {
-	const { status, data, error, isFetching } = useLocalContacts()
+	const { status: getStatus, data, error, isFetching, refetch } = useLocalContacts()
 	const [selectedData, setSelectedData] = React.useState([])
 	const [dataGroups, setDataGroups] = React.useState([])
+	const { mutate: deleteMutate, status: deleteStatus } = useDeleteLocalContacts()
 
 	React.useEffect(() => {
-		if (status !== 'loading' && status !== 'error') setDataGroups(groupData())
-	}, [data, groupData, status])
+		if (getStatus !== 'loading' && getStatus !== 'error') setDataGroups(groupData())
+	}, [data, groupData, getStatus])
 
 	const groupData = React.useCallback(() => {
 		const letters = []
@@ -51,9 +53,9 @@ export const ContactExample = () => {
 	}, [data])
 
 	const renderPosts = () => {
-		if (status === 'loading') {
+		if (getStatus === 'loading') {
 			return <Text>Loading...</Text>
-		} else if (status === 'error') {
+		} else if (getStatus === 'error') {
 			return <Text>{error.message}</Text>
 		} else {
 			const renderItem = ({ item }) => {
@@ -75,6 +77,9 @@ export const ContactExample = () => {
 					renderItem={renderItem}
 					renderSectionHeader={renderSectionHeader}
 					extraData={selectedData}
+					onRefresh={refetch}
+					refreshing={isFetching}
+					progressViewOffset={100}
 				/>
 			)
 		}
@@ -82,8 +87,16 @@ export const ContactExample = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text>{isFetching ? 'Updating...' : ''}</Text>
+			<Text style={{ marginTop: 20 }}>{isFetching ? 'Updating...' : ''}</Text>
 			<Text>Here's ur contacts: </Text>
+			<TouchableOpacity
+				style={{ backgroundColor: 'blue', paddingVertical: 10 }}
+				onPress={() => {
+					const remainingData = differenceWith(data, selectedData, isEqual)
+					deleteMutate(remainingData)
+				}}>
+				<Text style={{ color: 'white' }}>{deleteStatus === 'loading' ? 'Loading' : 'IMPORT HERE'}</Text>
+			</TouchableOpacity>
 			{renderPosts()}
 		</View>
 	)
