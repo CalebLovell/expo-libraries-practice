@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { StyleSheet, View } from 'react-native'
 
-import { ContactExample } from './components/ContactExample'
+import { InfiniteContactExample } from './components/InfiniteContactsExample'
 import React from 'react'
 import { StyleProvider } from './components/StyleProvider'
 
@@ -12,7 +12,7 @@ const App = () => {
 		<QueryClientProvider client={queryClient}>
 			<StyleProvider>
 				<View style={styles.container}>
-					<ContactExample />
+					<InfiniteContactExample />
 				</View>
 			</StyleProvider>
 		</QueryClientProvider>
